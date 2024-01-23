@@ -1,64 +1,46 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.commons.cli.*;
 
 public class Main {
 
-    private static final Logger logger = LogManager.getLogger();
-
     public static void main(String[] args) {
-        // Sets options for either i or input
+        try {
+            Configuration config = configure(args);
+
+            // create a maz instance
+            Maze maze = new Maze(config.getInputFile());
+
+            // pass the maze to maze runner
+            MazeRunner mazeRunner = new MazeRunner(maze);
+            String result = mazeRunner.run();
+
+            System.out.println(result);
+        } catch (Exception e) {
+            System.err.println("An error has occurred");
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    private static Configuration configure(String[] args) throws ParseException {
         Options options = new Options();
-        options.addOption(Option.builder("i").longOpt("input").hasArg().desc("Input file path").build());
-
+        options.addOption("i", "input", true, "Input file path");
         CommandLineParser parser = new DefaultParser();
-        CommandLine cmd;
-
-        try {
-            //parses the cli args
-            cmd = parser.parse(options, args);
-        } catch (ParseException e) {
-            // handles cli parsing errors
-            logger.error("Error: " + e.getMessage());
-            logger.error("Use the format --> java -jar mazerunner.jar -i <inputFile>");
-            System.exit(1);
-            return;
-        }
-
+        CommandLine cmd = parser.parse(options, args);
         String inputFile = cmd.getOptionValue("i");
+        return new Configuration(inputFile);
+    }
 
-        // shows error if no file is detected
-        if (inputFile == null) {
-            logger.error("missing -i or --input");
-            logger.error("use the format --> java -jar mazerunner.jar -i 'inputFile'");
-            System.exit(1);
+    private static class Configuration {
+        private final String inputFile;
+
+        public Configuration(String inputFile) {
+            this.inputFile = inputFile;
         }
 
-        logger.info("** Starting Maze Runner");
-        try {
-            logger.info("**** Reading the maze from file " + inputFile);
-            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                for (int idx = 0; idx < line.length(); idx++) {
-                    if (line.charAt(idx) == '#') {
-                        logger.info("WALL ");
-                    } else if (line.charAt(idx) == ' ') {
-                        logger.info("PASS ");
-                    }
-                }
-                logger.info(System.lineSeparator());
-            }
-        } catch(Exception e) {
-            logger.info("/!\\ An error has occured /!\\");
+        public String getInputFile() {
+            return inputFile;
         }
-        logger.info("**** Computing path");
-        logger.info("PATH NOT COMPUTED");
-        logger.info("** End of MazeRunner");
     }
 }
