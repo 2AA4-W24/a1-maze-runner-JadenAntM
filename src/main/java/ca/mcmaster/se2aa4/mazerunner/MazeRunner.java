@@ -5,8 +5,8 @@ import java.util.List;
 public class MazeRunner {
     private Maze maze;
 
-    public MazeRunner(String inputFile) {
-        this.maze = new Maze(inputFile);
+    public MazeRunner(Maze maze) {
+        this.maze = maze;
     }
 
     public String run() {
@@ -16,7 +16,7 @@ public class MazeRunner {
     }
 
     private Path findPath() {
-        // Path finding logic
+        // path finding
         return new Path();
     }
 
@@ -30,7 +30,7 @@ public class MazeRunner {
         }
 
         public String toFactorizedForm() {
-            // Convert to factorized
+            // convert to fact
             return "";
         }
     }
