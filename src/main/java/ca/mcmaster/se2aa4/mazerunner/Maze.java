@@ -9,7 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class Maze {
-    private static final Log logger = LogFactory.getLog(Maze.class)
+    private static final Log logger = LogFactory.getLog(Maze.class);
     private char[][] mazeArray; // 2D array
 
     public Maze(String inputFile) {
