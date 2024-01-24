@@ -5,11 +5,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 public class Maze {
-    private static final Log logger = LogFactory.getLog(Maze.class);
+    private static final Logger logger = LogManager.getLogger(Maze.class);
     private char[][] mazeArray; // 2D array
 
     public Maze(String inputFile) {
