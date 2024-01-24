@@ -5,8 +5,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class Maze {
+    private static final Log logger = LogFactory.getLog(Maze.class)
     private char[][] mazeArray; // 2D array
 
     public Maze(String inputFile) {
@@ -22,10 +25,10 @@ public class Maze {
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
-            // Starts maze array based on size
+            // starts maze array based on size
             mazeArray = new char[lines.size()][];
             for (int i = 0; i < lines.size(); i++) {
-                // Stores elements as a row
+                // stores elements as a row
                 mazeArray[i] = lines.get(i).toCharArray();
             }
         } catch (IOException e) {
