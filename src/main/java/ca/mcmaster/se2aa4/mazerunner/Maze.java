@@ -38,12 +38,23 @@ public class Maze {
     }
 
     public Point findEntryPoint() {
-        // find entry point
+        //checks teh left side of the maze
+        for (int i = 0; i < mazeArray.length; i++) {
+            if (mazeArray[i][0] == ' ') {
+                return new Point(0, i);
+            }
+        }
         return null;
     }
 
     public Point findExitPoint() {
-        // find exit point
+        //checks right side of the maze
+        for (int i = 0; i < mazeArray.length; i++) {
+            int lastColumnIndex = mazeArray[i].length - 1;
+            if (mazeArray[i][lastColumnIndex] == ' ') {
+                return new Point(lastColumnIndex, i);
+            }
+        }
         return null;
     }
 
@@ -57,4 +68,5 @@ public class Maze {
             this.y = y;
         }
     }
+    
 }
