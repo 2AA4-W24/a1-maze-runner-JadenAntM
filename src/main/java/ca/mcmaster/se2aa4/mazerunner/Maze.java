@@ -52,7 +52,6 @@ public class Maze {
         for (int i = 0; i < mazeArray.length; i++) {
             int lastColumnIndex = mazeArray[i].length - 1;
             if (lastColumnIndex >= 0 && mazeArray[i][lastColumnIndex] == ' ') {
-                System.out.println("The exit point has been found at: [" + lastColumnIndex + ", " + i + "]");
                 return new int[]{lastColumnIndex, i};
             }
         }
