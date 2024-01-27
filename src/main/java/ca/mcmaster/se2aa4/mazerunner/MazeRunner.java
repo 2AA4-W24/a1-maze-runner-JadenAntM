@@ -64,6 +64,8 @@ public class MazeRunner {
                 return Direction.Left;
             case Left:
                 return Direction.Up;
+            default:
+                throw new IllegalStateException("Unknown direction");
         }
     }
 
@@ -78,6 +80,8 @@ public class MazeRunner {
                 return new int[]{currentPosition[0] - 1, currentPosition[1]};
             case Down:
                 return new int[]{currentPosition[0], currentPosition[1] + 1};
+            default:
+                throw new IllegalStateException("Unknown direction");
         }
     }
 
