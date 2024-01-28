@@ -13,7 +13,8 @@ public class MazeRunner {
     public String run() {
         // main logic
         Path path = findPath();
-        return FormatPath.toCanonical(path.getMoves()); //formats to canonical
+        //return FormatPath.toCanonical(path.getMoves()); //formats to canonical
+        return FormatPath.toFactorized(path.getMoves());
     }
 
     // method that finds the path solution
