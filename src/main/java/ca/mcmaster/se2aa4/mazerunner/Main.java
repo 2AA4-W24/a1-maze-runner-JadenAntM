@@ -13,11 +13,16 @@ public class Main {
 
             // pass the maze to maze runner
             MazeRunner mazeRunner = new MazeRunner(maze);
-            String result = mazeRunner.run();
-
-            System.out.println(result);
+            
+            if (config.getPath() != null) {
+                boolean isValid = mazeRunner.validatePath(config.getPath());
+                System.out.println("is the path valid: " + isValid);
+            } else {
+                String result = mazeRunner.run();
+                System.out.println(result);
+            }
         } catch (Exception e) {
-            System.err.println("An error has occurred");
+            System.err.println("Error has occurred");
             e.printStackTrace();
             System.exit(1);
         }
@@ -26,21 +31,32 @@ public class Main {
     private static Configuration configure(String[] args) throws ParseException {
         Options options = new Options();
         options.addOption("i", "input", true, "Input file path");
+        options.addOption("p", "path", true, "Path to validate");
+
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = parser.parse(options, args);
+
         String inputFile = cmd.getOptionValue("i");
-        return new Configuration(inputFile);
+        String path = cmd.getOptionValue("p");
+
+        return new Configuration(inputFile, path);
     }
 
     private static class Configuration {
         private final String inputFile;
+        private final String path;
 
-        public Configuration(String inputFile) {
+        public Configuration(String inputFile, String path) {
             this.inputFile = inputFile;
+            this.path = path;
         }
 
         public String getInputFile() {
             return inputFile;
+        }
+
+        public String getPath() {
+            return path;
         }
     }
 }
