@@ -35,11 +35,10 @@ public class FormatPath {
 
     //appends move to stringbuilder and groups the same letter
     private static void appendMove(StringBuilder sb, String move, int count) {
-        sb.append(move);
         if (count > 1) {
             sb.append(count);
         }
-        sb.append(" ");  // adds space between letters
+        sb.append(move).append(" ");  // adds space between letters
     }
 }
 

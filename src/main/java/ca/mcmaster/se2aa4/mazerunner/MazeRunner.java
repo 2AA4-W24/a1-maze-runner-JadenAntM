@@ -2,6 +2,8 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MazeRunner {
     private Maze maze;
@@ -27,7 +29,7 @@ public class MazeRunner {
         while (!(playerPos[0] == exitPoint[0] && playerPos[1] == exitPoint[1])) {
 
             Direction rightDir = turnRight(movementDir);  //trys to go right first
-            int[] rightPos = getFuturePosition(playerPos, rightDir);
+            int[] rightPos = futurePlayerPos(playerPos, rightDir);
 
             // for turning right then forward
             if (mazeBound(rightPos) && maze.getMazeArr()[rightPos[1]][rightPos[0]] == ' ') {
@@ -37,7 +39,7 @@ public class MazeRunner {
                 moves.add("F");
             // if cant go right it goes forward
             } else {
-                int[] forwardPos = getFuturePosition(playerPos, movementDir);
+                int[] forwardPos = futurePlayerPos(playerPos, movementDir);
                 if (mazeBound(forwardPos) && maze.getMazeArr()[forwardPos[1]][forwardPos[0]] == ' ') {
                     playerPos = forwardPos;
                     moves.add("F");
@@ -71,7 +73,7 @@ public class MazeRunner {
     }
 
     // calculate the future direction based on current position
-    private int[] getFuturePosition(int[] currentPosition, Direction direction) {
+    private int[] futurePlayerPos(int[] currentPosition, Direction direction) {
         switch (direction) {
             case Up:
                 return new int[]{currentPosition[0], currentPosition[1] - 1};
@@ -103,7 +105,7 @@ public class MazeRunner {
 
     public boolean validatePath(String path) {
         // convert the string path into a list of moves
-        List<String> moves = pathToList(path);
+        List<String> moves = expandFactorizedPath(path);
 
         int[] playerPos = maze.findEntryPoint();
         Direction movementDir = Direction.Right; // entry from the east
@@ -112,7 +114,7 @@ public class MazeRunner {
         for (String move : moves) {
             switch (move) {
                 case "F":
-                    playerPos = getFuturePosition(playerPos, movementDir);
+                    playerPos = futurePlayerPos(playerPos, movementDir);
                     if (!mazeBound(playerPos) || maze.getMazeArr()[playerPos[1]][playerPos[0]] == '#') {
                         return false; //returns false if path is invalid
                     }
@@ -129,6 +131,25 @@ public class MazeRunner {
         int[] exitPoint = maze.findExitPoint(); //gets exit point
         return playerPos[0] == exitPoint[0] && playerPos[1] == exitPoint[1]; //checks to see if player is at exit
         }
+        
+        
+    // Method to allow users to input factorized form instead
+    private List<String> expandFactorizedPath(String path) {
+        List<String> moves = new ArrayList<>();
+        Pattern pattern = Pattern.compile("(\\d*)([FRL])");
+        Matcher matcher = pattern.matcher(path);
+
+        while (matcher.find()) {
+            String countStr = matcher.group(1);
+            String move = matcher.group(2);
+            int count = countStr.isEmpty() ? 1 : Integer.parseInt(countStr);
+
+            for (int i = 0; i < count; i++) {
+                moves.add(move);
+                }
+        }
+        return moves;
+    }
 
     // convert string path into a list of moves
     private List<String> pathToList(String path) {
