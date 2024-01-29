@@ -1,8 +1,12 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 import org.apache.commons.cli.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 public class Main {
+    private static final Logger logger = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
         try {
@@ -16,14 +20,13 @@ public class Main {
             
             if (config.getPath() != null) {
                 boolean isValid = mazeRunner.validatePath(config.getPath());
-                System.out.println("is the path valid: " + isValid);
+                logger.info("is the path valid: " + isValid);
             } else {
                 String result = mazeRunner.run();
-                System.out.println(result);
+                logger.info(result);
             }
         } catch (Exception e) {
-            System.err.println("Error has occurred");
-            e.printStackTrace();
+            logger.error("Error has occurred", e);
             System.exit(1);
         }
     }
