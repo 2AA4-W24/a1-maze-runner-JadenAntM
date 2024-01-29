@@ -100,4 +100,42 @@ public class MazeRunner {
     enum Direction {
         Up, Right, Down, Left
     }
+
+    public boolean validatePath(String path) {
+        // convert the string path into a list of moves
+        List<String> moves = pathToList(path);
+
+        int[] playerPos = maze.findEntryPoint();
+        Direction movementDir = Direction.Right; // entry from the east
+
+        //loops through each move in the path
+        for (String move : moves) {
+            switch (move) {
+                case "F":
+                    playerPos = getFuturePosition(playerPos, movementDir);
+                    if (!mazeBound(playerPos) || maze.getMazeArr()[playerPos[1]][playerPos[0]] == '#') {
+                        return false; //returns false if path is invalid
+                    }
+                    break;
+                case "R":
+                    movementDir = turnRight(movementDir);
+                    break;
+                case "L":
+                    movementDir = turnRight(turnRight(turnRight(movementDir)));
+                    break;
+            }
+        }
+
+        int[] exitPoint = maze.findExitPoint(); //gets exit point
+        return playerPos[0] == exitPoint[0] && playerPos[1] == exitPoint[1]; //checks to see if player is at exit
+        }
+
+    // convert string path into a list of moves
+    private List<String> pathToList(String path) {
+        List<String> moves = new ArrayList<>();
+        for (char c : path.toCharArray()) {
+            moves.add(String.valueOf(c));
+        }
+        return moves;
+    }
 }
