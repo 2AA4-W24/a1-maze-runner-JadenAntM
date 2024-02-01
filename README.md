@@ -86,27 +86,4 @@ If you are also delivering the bonus, your program will react to a third flag:
 
 #### Examples
 
-When no logs are activated, the programs only print the computed path on the standard output.
-
-```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt
-4F
-mosser@azrael A1-Template %
-```
-
-If a given path is correct, the program prints the message `correct path` on the standard output.
-
-```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 4F
-correct path
-mosser@azrael A1-Template %
-```
-
-If a given path is incorrect, the program prints the message `incorrect path` on the standard output.
-
-```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 3F
-inccorrect path
-mosser@azrael A1-Template %
-```
 
