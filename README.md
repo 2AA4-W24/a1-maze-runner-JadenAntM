@@ -21,22 +21,28 @@ This program explores a maze, finding a path from an entry point to an exit one.
   - R for turning right
   - L for turning left
 - Paths can be represented in canonical form (e.g., FFLFF) or factorized form (e.g., 2F L 2F).
-- 
+  
 ## How to run this software?
 
-To build the program, simply package it with Maven:
+#### **Firstly clone the repo** ####
+
+**To build the program, simply package it with Maven:**
 
 ```
 directory % mvn -q clean package 
 ```
-- Standard execution
+**Standard execution:**
 ```
 java -jar target/mazerunner.jar -i examples/[MAZE_FILE]
 ```
-Verify a path:
+**Verify a path:**
 ```
 java -jar target/mazerunner.jar -i examples/[MAZE_FILE] -p [PATH_SEQUENCE]
 ```
+### Technical Environment
+- **Required Software:** OpenJDK (21), Git
+- **Platform:** Shell Environment
+- **Additional Resources:** GitHub Classroom for assignment acceptance and version control
 
 ### Provided version (starter code)
 
@@ -62,31 +68,5 @@ PATH NOT COMPUTED
 ** End of MazeRunner
 ```
 
-When called on a non-existing file. it prints an error message
-
-```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar ./examples/small.maz.txtd
-** Starting Maze Runner
-**** Reading the maze from file ./examples/small.maz.txtd
-/!\ An error has occured /!\
-**** Computing path
-PATH NOT COMPUTED
-** End of MazeRunner
-```
-
-### Delivered version
-
-#### Command line arguments
-
-The delivered program at the end of this assignment should use the following flags:
-
-- `-i MAZE_FILE`: specifies the filename to be used;
-- `-p PATH_SEQUENCE`: activates the path verification mode to validate that PATH_SEQUENCE is correct for the maze
-
-If you are also delivering the bonus, your program will react to a third flag:
-
-- `-method {tremaux, righthand}`: specifies which path computation method to use. (default is right hand)
-
-#### Examples
 
 
