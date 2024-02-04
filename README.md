@@ -1,12 +1,16 @@
 # Assignment A1 - Maze Runner
 
+## Information
+
   * **Student**: Jaden Moore 
   * **Program**: B. Eng. In Software Engineering
   * **Course code**: SFWRENG 2AA4
   * **Course Title**: Software Design I - Introduction to Software Development 
-  * Term: *Level II - Winter 2024*
 
-## Business Logic Specification
+## Project Overview
+Maze Runner is a Java-based application developed for the course SFWRENG 2AA4. The program is designed to explore mazes, finding paths from entry to exit points. The mazes are represented in text files, with specific symbols indicating walls and passageways.
+
+### Business Logic Specification
 
 This program explores a maze, finding a path from an entry point to an exit one.
 
