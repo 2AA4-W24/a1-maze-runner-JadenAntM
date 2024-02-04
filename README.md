@@ -14,29 +14,28 @@ Maze Runner is a Java-based application developed for the course SFWRENG 2AA4. T
 
 This program explores a maze, finding a path from an entry point to an exit one.
 
-- The maze is stored in a text file, with `#` representing walls and `␣` (_empty space_) representing passages.
-- You’ll find examples of such mazes in the [`examples`](./examples) directory. 
-    - You can also use the [Maze Generator](https://github.com/ace-lectures/maze-gen) to generate others.
-- The Maze is surrounded by walls on its four borders, except for its entry/exit points.
-    - Entry and exit points are always located on the East and West border.
-    - The maze is not directed. As such, exit and entry can be interchanged.
-- At the beginning of the exploration, we're located on the entry tile, facing the opposite side (e.g., if entering by the eastern entry, you're facing West).
-- The program generates a sequence of instructions to reach the opposite exit (i.e., a "path"):
-    - `F` means 'move forward' according to your current direction
-    - `R` means 'turn right' (does not move, just change direction), and `L` means ‘turn left’. 
-- A canonical path contains only `F`, `R` and `L` symbols
-- A factorized path squashes together similar instructions (i.e., `FFF` = `3F`, `LL` = `2L`).
-- Spaces are ignored in the instruction sequence (only for readability: `FFLFF` = `FF L FF`)
-- The program takes as input a maze and print the path on the standard output.
-    - For this assignment, the path does not have to be the shortest one.
-- The program can take a path as input and verify if it's a legit one.
-
+- Maze files use # for walls and spaces for passages.
+- Mazes are enclosed by walls except for entry and exit points, located on the East and West borders.
+- The maze exploration algorithm generates a sequence of instructions:
+  - F for moving forward
+  - R for turning right
+  - L for turning left
+- Paths can be represented in canonical form (e.g., FFLFF) or factorized form (e.g., 2F L 2F).
+- 
 ## How to run this software?
 
 To build the program, simply package it with Maven:
 
 ```
-mosser@azrael A1-Template % mvn -q clean package 
+directory % mvn -q clean package 
+```
+- Standard execution
+```
+java -jar target/mazerunner.jar -i examples/[MAZE_FILE]
+```
+Verify a path:
+```
+java -jar target/mazerunner.jar -i examples/[MAZE_FILE] -p [PATH_SEQUENCE]
 ```
 
 ### Provided version (starter code)
